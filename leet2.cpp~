@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+#include <cmath>
+#include <cstdio>
+
+class Solution {
+	public:
+		 double findMedianSortedArrays(int A[], int m, int B[], int n) {
+		        if (m < n) 
+							            return findMedian(A, B, 0, m - 1, m, n);
+						        else 
+									            return findMedian(B, A, 0, n - 1, n, m);
+								    }
+			    
+			    double findMedian(int A[], int B[], int l, int r, int nA, int nB)
+					    {
+							        if (l > r)
+										            return findMedian(B, A, max(0, (nA + nB) / 2 - nA),
+															                min(nB, (nA + nB) / 2), nB, nA);
+									        
+									        int i = (l + r) / 2;
+											        int j = (nA + nB) / 2 - i - 1;
+													        
+													        printf ("nA=%d nB=%d i=%d j=%d\n", nA, nB, i, j);
+															       // char ch;
+															       // scanf ("%c", &ch);
+															        
+															        if (j >= 0 && A[i] < B[j])
+																		            return findMedian(A, B, i + 1, r, nA, nB);
+																	        else if (j < nB - 1 && A[i] > B[j + 1])
+																				            return findMedian(A, B, l, i - 1, nA, nB);
+																			        else
+																						        {
+																									            printf (" here i=%d j=%d\n", i, j);
+																												            if ((nA + nB) % 2 == 1)
+																																                return A[i];
+																															            else if (i > 0)
+																																			                return (A[i] + max(A[i - 1], B[j])) / 2.0;
+																																		            else
+																																						                return (A[i] + B[j]) / 2.0;
+																																					        }
+																					    }
+};
+
+int main() {
+	    // Start typing your code here...
+	    int a[1];
+		    int b[] = {2, 3};
+			    
+			    class Solution s;
+				    cout << s.findMedianSortedArrays(a, 0, b, 2);
+					    
+					    return 0;
+}
