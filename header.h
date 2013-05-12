@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <cstring>
 #include <vector>
 #include <cstdio>
 #include <cmath>
@@ -34,7 +35,7 @@ void prList(ListNode *p)
 {
 	for (; p != NULL; p = p->next)
 		printf ("%d -> ", p->val);
-	puts ("");
+	puts (")");
 }
 
 #endif
