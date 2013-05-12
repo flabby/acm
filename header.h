@@ -11,6 +11,8 @@
 
 using namespace std;
 
+typedef long long int lint;
+
 struct ListNode
 {
 	int val;
