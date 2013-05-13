@@ -1,0 +1,69 @@
+/*
+  Substring with Concatenation of All Words
+  */
+#include "header.h"
+
+class Solution1
+{
+	public:
+
+class Solution
+{
+	public:
+		vector<int> findSubstring(string S, vector<string> &L)
+		{
+			map<string, int>mp;
+			map<string, int>::iterator it;
+			map<string, int> cnt;
+
+			vector<int>ret;
+
+			for (int i = 0; i < L.size(); i++)
+				mp[L[i]]++;
+	
+	//		for (it = mp.begin(); it != mp.end(); it++)
+	//			printf ("%s -> %d\n", it->first.c_str(), it->second);
+
+			int n = L.size();
+			int m = L[0].length();
+
+			for (int i = 0; i + n * m - 1 < S.length(); i++)
+			{
+				int j;
+				cnt.clear();
+				for (j = i; j < i + n * m; j += m)
+				{
+					string tmp = S.substr(j, m);
+					if (mp.find(tmp) == mp.end())
+						break;
+
+					cnt[tmp]++;
+					if (cnt[tmp] > mp[tmp])
+						break;
+				}
+				
+				if (j == i + n * m)
+					ret.push_back(i);
+			}
+			
+	//		for (int i = 0; i < ret.size(); i++)
+	//			printf ("ret[%d]=%d\n", i, ret[i]);
+
+			return ret;
+		}
+};
+
+int main()
+{
+	Solution s;
+
+	vector<string> L;
+	L.push_back("foo");
+	//L.push_back("foo");
+	L.push_back("bar");
+
+	vector<int> ret;
+	ret = s.findSubstring("barfoothefoobarman", L);
+	
+	return 0;
+}

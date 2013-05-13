@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <cmath>
 
+#include <map>
 using namespace std;
 
 typedef long long int lint;
