@@ -8,9 +8,9 @@ class Solution
 	public:
 		void nextPermutation(vector<int> &num)
 		{
-			next_permutation(num.begin(), num.end());
+		//	next_permutation(num.begin(), num.end());
 			int len = num.size();
-		/*	
+			
 
 			
 			if (len == 1)
@@ -26,9 +26,11 @@ class Solution
 				if (num[x2] > num[x1])
 					break;
 
+	//		printf ("x1=%d x2=%d\n", x1, x2);
+	//		printf ("num[-1]=%d\n", num[-1]);
 			swap(num[x1], num[x2]);
 			reverse(num.begin() + x1 + 1 , num.end());
-*/
+			
 			for (int i = 0; i < len; i++)
 				printf ("%d ", num[i]);
 			puts ("\n");
@@ -38,10 +40,10 @@ class Solution
 int main()
 {
 	int a[] = {1, 2, 3, 4, 5, 6};
-	vector<int> avc(a, a + 6); 
+	vector<int> avc(a, a + 3); 
 
 	Solution s;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 10; i++)
 		s.nextPermutation(avc);
 
 	return 0;
