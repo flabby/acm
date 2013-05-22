@@ -1,0 +1,47 @@
+/*
+   Pow(x, n)
+   */
+#include "header.h"
+
+const double eps = (1e-6);
+
+class Solution
+{
+	public:
+		double pow(double x, int n)
+		{
+			if (fabs(x - 1) < eps)
+				return 1;
+			if (x < eps && x > -eps)
+				if (!n)
+					return 0;
+				else
+					return 1;
+
+			double ret = 1;
+			double b = x;
+			if (n < 0)
+			{
+				b = 1.0 / x;
+				n = -n;
+			}
+			for (; n; n >>= 1)
+			{
+				if (n & 1)
+					ret *= b;
+			//	printf ("ret=%lf n=%d b=%lf\n", ret, n, b);
+				b = b * b;
+			}
+
+			return ret;
+		}
+};
+
+int main()
+{
+	Solution s;
+	cout << s.pow(2, 10) << endl;
+	cout << s.pow(2, -2) << endl;
+
+	return 0;
+}
