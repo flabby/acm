@@ -1,54 +1,60 @@
 /*
-   Generate Parentheses
+   Merge Two Sorted Lists
    */
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <cstdio>
-#include <vector>
-using namespace std;
+#include "header.h"
 
 class Solution
 {
 	public:
-		vector<string> generateParenthesis(int n)
+		ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
 		{
-			vector<string> ans;
+			ListNode *ret = NULL;
+			ListNode *last = NULL;
 
-			gen(ans, "", 0, 0, n);
-			return ans;
-		}
-
-		void gen(vector<string> &ans, string str, int l, int r, int n)
-		{
-			if (l == n)
+			while (l1 != NULL || l2 != NULL)
 			{
-				ans.push_back(str.append(n - r, ')'));
-				return;
+				ListNode *p(NULL);
+				
+				if (l2 == NULL || (l1 != NULL && l1->val < l2->val))
+				{
+					p = l1;
+					l1 = l1->next;
+				}
+				else 
+				{
+					p = l2;
+					l2 = l2->next;
+				}
+
+				p->next = NULL;
+				if (last == NULL)
+					last = p;
+				else
+				{
+					last->next = p;
+					last = p;
+				}
+
+				if (ret == NULL)
+					ret = last;
 			}
 
-			gen(ans, str + "(", l + 1, r, n);
-			if (l > r)
-				gen(ans, str + ")", l, r + 1, n);
+			return ret;
 		}
 };
 
-void pr(vector<string> &a)
-{
-	puts ("-----------------");
-	for (int i = 0; i < a.size(); i++)
-		cout << a[i] << endl;
-	puts ("--------------------------");
-}
-
 int main()
 {
+	int a[] = {1, 2, 3, 5};
+	int b[] = { 4, 6, 7, 8};
+	ListNode *lst1 = makeList(a, 4);
+	ListNode *lst2 = makeList(b, 4);
+	prList(lst1);
+	prList(lst2);
+
 	Solution s;
+	ListNode *ret = s.mergeTwoLists(lst1, lst2);
+	prList(ret);
 
-	vector<string> a = s.generateParenthesis(3);
-	pr(a);
-
-	//pr(s.generateParenthesis(3));
 	return 0;
 }
-
