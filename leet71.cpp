@@ -14,16 +14,22 @@ class Solution
 
 			string token;
 			int i = 0;
+			int flg = 0;
 			while ((token = getNext(path, i)) != "")
 			{
-				if (token[1] == '.')
+				if (token == "../" || token == "..")
+					moveBack(ret);
+				else if (token != "./" && token != ".")
 				{
-					if (token.length() > 2 && token[2] == '.')
-						moveBack(ret);
-				}
-				else
+					if (flg && token[0] == '/')
+						continue;
+					flg = 1;
 					ret.append(token);
+				}
 			}
+
+			if (ret.length() > 1 && ret[ret.length() - 1] == '/')
+				ret.erase(ret.end() - 1);
 
 			return ret;
 //			return ret.substr(0, ret.length());
@@ -36,16 +42,19 @@ class Solution
 
 			int len = ret.length(); 
 			int i;
-			for (i = len - 1; i >= 0; i--)
+			for (i = len - 2; i >= 0; i--)
 				if (ret[i] == '/')
 					break;
-			ret.erase(ret.begin() + i, ret.end());
+			ret.erase(ret.begin() + i + 1, ret.end());
 //			cout << "ret=(" << ret << ")\n";
 		}
 
 		string getNext(string &path, int &id)
 		{
 			int ed = id;
+			if (id >= path.length())
+				return "";
+
 			for (; ed < path.length(); ed++)
 				if (path[ed] == '/')
 					break;
@@ -59,9 +68,11 @@ class Solution
 int main()
 {
 	Solution s;
-	cout << s.simplifyPath("/..") << endl;
+//	cout << s.simplifyPath("/..") << endl;
 	cout << s.simplifyPath("/a/./b/../../c/") << endl;
 	cout << s.simplifyPath("/ac/") << endl;
+	cout << s.simplifyPath("/a//c/") << endl;
+	cout << s.simplifyPath("///") << endl;
 
 	return 0;
 }

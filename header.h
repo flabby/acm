@@ -32,6 +32,18 @@ struct ListNode
 	ListNode(int x):val(x), next(NULL){}
 };
 
+void prMat(vector<vector<int> > &a)
+{
+	puts ("-----------------------");
+	for (int i = 0; i < a.size(); i++)
+	{
+		for (int j = 0; j < a[i].size(); j++)
+			printf ("%d ", a[i][j]);
+		puts ("");
+	}
+	puts ("-----------------------------\n");
+}
+
 ListNode *makeList(int a[], int n)
 {
 	ListNode *ret = NULL;
