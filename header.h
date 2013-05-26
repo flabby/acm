@@ -8,11 +8,59 @@
 #include <vector>
 #include <cstdio>
 #include <cmath>
+#include <limits.h>
 
 #include <map>
 using namespace std;
 
 typedef long long int lint;
+
+struct TreeNode
+{
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x): val(x), left(NULL), right(NULL){}
+};
+
+//        a[1]
+//    a[2]    a[3]
+// a[4] a[5] a[6]  a[7]
+TreeNode *makeTree(int a[], int n, int id)
+{
+	TreeNode *root = NULL;
+	if (a[id] != -1)
+	{
+		printf ("n=%d id=%d\n", n, id);
+		root = new TreeNode(a[id]);
+		if (2 * id  <= n)
+			root->left = makeTree(a, n, 2 * id);
+		if (2 * id + 1 <= n)
+			root->right = makeTree(a, n, 2 * id + 1);
+	}
+	return root;
+}
+
+//pre order
+void prTree(TreeNode *root)
+{
+	if (root != NULL)
+	{
+		printf (" x=%d ------", root->val);
+		if (root->left != NULL)
+		{
+			printf ("   [left] ");
+			prTree(root->left);
+			puts ("");
+		}
+		if (root->right != NULL)
+		{
+			printf ("   [right] ");
+			prTree(root->right);
+			puts ("");
+		}
+	}
+}
 
 struct Interval {
 	int start;
