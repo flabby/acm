@@ -8,6 +8,7 @@
 #include <vector>
 #include <cstdio>
 #include <cmath>
+#include <queue>
 #include <limits.h>
 
 #include <map>
@@ -31,7 +32,7 @@ TreeNode *makeTree(int a[], int n, int id)
 	TreeNode *root = NULL;
 	if (a[id] != -1)
 	{
-		printf ("n=%d id=%d\n", n, id);
+//		printf ("n=%d id=%d\n", n, id);
 		root = new TreeNode(a[id]);
 		if (2 * id  <= n)
 			root->left = makeTree(a, n, 2 * id);
